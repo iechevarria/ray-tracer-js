@@ -92,17 +92,15 @@ function Color () {
 
 // TODO
 function Node (sphere, color) {
-
 }
-
-Node.prototype.set = function (sphere, color, next) {
-
-};
 
 
 // ----------- Sphere object -----------
 
-function Sphere () {}
+function Sphere () {
+  this.ctr = new Vector();
+  this.rad = 0;
+}
 
 function Sphere (x, y, z, r) {
   this.set(x, y, z, r);
@@ -113,9 +111,34 @@ Sphere.prototype.set = function (x, y, z, r) {
   this.rad = r;
 };
 
-// TODO
-Sphere.prototype.intersect = function () {
+Sphere.prototype.intersect = function (ray, t, int_pt, normal) {
+  var A = 1.0;
+  var B = 2.0 * ray.dir.dot(ray.org.subtract(this.ctr));
+  var tmp = ray.org.subtract(this.ctr);
+  var C = (tmp.multiply(tmp)).sumComponents() - (this.rad * this.rad);
+  var dis = (B * B) - (4 * A * C);
 
+  // return 0 because discriminant is 0 or lower
+  if (dis <= 0) {
+    return 0;
+  } 
+
+  var t1 = ((-1 * B) + Math.sqrt(dis)) / (2.0 * A);
+  var t2 = ((-1 * B) - Math.sqrt(dis)) / (2.0 * A);
+
+  // get distance of closest sphere, return whether or nto an intersection
+  if ((t1 < 0) && (t2 < 0)) {
+    return 0;
+  } else if (t2 < 0) {
+    t = t1;
+  } else {
+    t = Math.min(t1, t2);
+  }
+
+  int_pt = ray.org.add(ray.dir.scalarMultiply(t));
+  normal = (int_pt.subtract(this.ctr)).scalarDivide(this.rad);
+  
+  return 1;
 };
 
 // ----------- Light object -----------
