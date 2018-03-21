@@ -17,10 +17,10 @@ console.log('Testing Color...');
 
 // add
 {
-  let a = new Color(0.4, 0.2, 1);
-  let b = new Color(0.2, 0.4, 0);
+  let a = new Color(4, 2, 1);
+  let b = new Color(2, 4, 0);
 
-  console.assert(a.add(b).equals(new Color(0.6, 0.6, 1)));
+  console.assert(a.add(b).equals(new Color(6, 6, 1)));
 
   console.log('  ✅  add passed');
 }
@@ -37,10 +37,10 @@ console.log('Testing Color...');
 
 // colorMultiply
 {
-  let a = new Color(5, 0.5, 1);
+  let a = new Color(5, 3, 1);
   let b = new Color(2, 4, 0);
 
-  console.assert(a.colorMultiply(b).equals(new Color(10, 2, 0)));
+  console.assert(a.colorMultiply(b).equals(new Color(10, 12, 0)));
 
   console.log('  ✅  colorMultiply passed');
 }
@@ -61,5 +61,4 @@ console.log('Testing Color...');
   console.assert(a.clamp(0, 1).equals(new Color(1, 0.14, 0)));
 
   console.log('  ✅  clamp passed');
-
 }
