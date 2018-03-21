@@ -51,7 +51,7 @@ class Vec3d {
   }
 
   toStr(v) {
-    return '(' + this.x + ', ' + this.y + ', ' + this.z + ')';
+    return 'Vec3d (' + this.x + ', ' + this.y + ', ' + this.z + ')';
   }
 }
 

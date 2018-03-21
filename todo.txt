@@ -1,0 +1,10 @@
+- color
+- ray
+- light source
+- triangle
+- intersection point
+- linear intersector
+- mat3d
+- transformation3d
+
+- obj IO
