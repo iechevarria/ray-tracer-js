@@ -5,7 +5,7 @@ class Ray {
   }
 
   times(s) {
-    return this.origin + s * this.direction;
+    return this.origin.vectorAdd(this.direction.scalarMultiply(s));
   }
 }
 
