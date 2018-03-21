@@ -9,4 +9,4 @@ class Ray {
   }
 }
 
-module.exports = Ray;
+// module.exports = Ray;

@@ -55,4 +55,4 @@ class Vec3d {
   }
 }
 
-module.exports = Vec3d;
+// module.exports = Vec3d;
