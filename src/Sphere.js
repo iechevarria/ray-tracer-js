@@ -8,9 +8,9 @@ class Sphere {
   intersect(r) {
     let t = 0;
 
-    let b = 2 * r.origin.dot(ray.origin.vectorSubtract(this.center));
-    let tmp = ray.origin.vectorSubtract(this.center);
-    let c = tmp.dot(tmp);
+    let b = 2 * r.direction.dot(r.origin.vectorSubtract(this.center));
+    let tmp = r.origin.vectorSubtract(this.center);
+    let c = tmp.dot(tmp) - this.rad * this.rad;
     let dis = b * b - 4 * c;
 
     if (dis <= 0) return new IntersectionPoint(false);
@@ -22,9 +22,10 @@ class Sphere {
     else if (t2 < 0) t = t1;
     else t = Math.min(t1, t2);
 
+
     let ip = r.times(t);
     let normal = (ip.vectorSubtract(this.center)).scalarDivide(this.radius);
 
-    return new IntersectionPoint(true, ip, normal, r);
+    return new IntersectionPoint(true, ip, normal, r, this.color);
   }
 }
