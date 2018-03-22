@@ -4,7 +4,7 @@ class Ray {
     this.direction = direction;
   }
 
-  times(s) {
+  at(s) {
     return this.origin.vectorAdd(this.direction.scalarMulitply(s));
   }
 }

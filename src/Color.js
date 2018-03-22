@@ -21,6 +21,10 @@ class Color {
     return new Color(this.r * c.r, this.g * c.g, this.b * c.b);
   }
 
+  scalarMultiply(s) {
+    return new Color(this.r * s, this.g * s, this.b * s);
+  }
+
   scalarDivide(s) {
     return new Color(this.r / s, this.g / s, this.b / s);
   }

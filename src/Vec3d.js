@@ -39,6 +39,10 @@ class Vec3d {
     return Math.sqrt(this.dot(this));
   }
 
+  distanceFrom(v) {
+    return (v.vectorSubtract(this)).length();
+  }
+
   normalize() {
     let len = this.length();
     return new Vec3d(this.x / len, this.y / len, this.z / len);

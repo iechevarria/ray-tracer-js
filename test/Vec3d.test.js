@@ -93,6 +93,16 @@ console.log('Testing Vec3d...');
   console.log('  ✅  length passed');
 }
 
+// distance
+{
+  let a = new Vec3d(0, 0, 1);
+  let b = new Vec3d(0, 0, 4);
+
+  console.assert(a.distanceFrom(b) === 3);
+
+  console.log('  ✅  distance passed');
+}
+
 // normalize
 {
   let a = new Vec3d(10, 3, 4);

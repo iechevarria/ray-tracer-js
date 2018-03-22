@@ -24,7 +24,7 @@ class Sphere {
     else t = Math.min(t1, t2);
 
 
-    let ip = r.times(t);
+    let ip = r.at(t);
     let normal = (ip.vectorSubtract(this.center)).scalarDivide(this.radius);
 
     return new IntersectionPoint(true, ip, normal, r, this.color);
