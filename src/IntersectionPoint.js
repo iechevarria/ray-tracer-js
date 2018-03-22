@@ -5,7 +5,7 @@ class IntersectionPoint {
     this.normal = normal;
     this.ray = ray;
     this.material = material;
-    if (this.hit) this.distance = (point.vectorSubtract(ray.origin)).length();
+    if (this.hit) this.distance = point.distanceFrom(ray.origin);
     else this.distance = Number.MAX_SAFE_INTEGER;
   }
 
