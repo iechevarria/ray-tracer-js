@@ -8,8 +8,4 @@ class IntersectionPoint {
     if (this.hit) this.distance = point.distanceFrom(ray.origin);
     else this.distance = Number.MAX_SAFE_INTEGER;
   }
-
-  closerThan() {
-    
-  }
 }

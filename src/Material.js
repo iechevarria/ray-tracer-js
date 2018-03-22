@@ -1,11 +1,7 @@
 class Material {
-  constructor(albedo, isSpecular) {
+  constructor(albedo, specular) {
     this.albedo = albedo;
-    this.isSpecular = isSpecular;
-  }
-
-  get specular() {
-    return isSpecular;
+    this.specular = specular;
   }
 
   reflects(c) {

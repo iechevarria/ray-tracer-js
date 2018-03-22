@@ -1,7 +1,8 @@
 class Scene {
-  constructor () {
+  constructor (depth) {
     this.geometry = [];
     this.lights = [];
+    this.depth = depth;
   }
 
   addGeometry(g) {
