@@ -1,6 +1,7 @@
 class Material {
-  constructor(albedo, specular) {
-    this.albedo = albedo;
+  constructor(diffuseAlbedo, specularAlbedo, specular) {
+    this.diffuseAlbedo = diffuseAlbedo;
+    this.specularAlbedo = specularAlbedo;
     this.specular = specular;
   }
 

@@ -1,8 +1,8 @@
 class Sphere {
-  constructor(center, radius, color) {
+  constructor(center, radius, material) {
     this.center = center;
     this.radius = radius;
-    this.color = color;
+    this.material = material;
   }
 
   intersect(r) {
@@ -26,6 +26,6 @@ class Sphere {
     let ip = r.at(t);
     let normal = (ip.vectorSubtract(this.center)).scalarDivide(this.radius);
 
-    return new IntersectionPoint(true, ip, normal, r, this.color);
+    return new IntersectionPoint(true, ip, normal, r, this.material);
   }
 }
