@@ -6,8 +6,6 @@ class Sphere {
   }
 
   intersect(r) {
-    let t = 0;
-
     let b = 2 * r.direction.dot(r.origin.vectorSubtract(this.center));
     let tmp = r.origin.vectorSubtract(this.center);
     let c = tmp.dot(tmp) - this.rad * this.rad;
@@ -15,6 +13,7 @@ class Sphere {
 
     if (dis <= 0) return new IntersectionPoint(false);
 
+    let t = 0;
     let t1 = (-1 * b + Math.sqrt(dis)) / 2;
     let t2 = (-1 * b - Math.sqrt(dis)) / 2;
 
