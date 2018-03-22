@@ -6,9 +6,11 @@ class Sphere {
   }
 
   intersect(r) {
+    let a = 1.0;
     let b = 2 * r.direction.dot(r.origin.vectorSubtract(this.center));
+
     let tmp = r.origin.vectorSubtract(this.center);
-    let c = tmp.dot(tmp) - this.rad * this.rad;
+    let c = tmp.dot(tmp) - this.radius * this.radius;
     let dis = b * b - 4 * c;
 
     if (dis <= 0) return new IntersectionPoint(false);
