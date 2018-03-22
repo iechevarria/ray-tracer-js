@@ -5,13 +5,9 @@ const traceRay = (r, s, d) => {
   let ip = s.intersect(r);
   
   if (ip.hit && ip.normal.z > 0) {
-    for (let l in s.lights) {
-      let rs = new Ray(ip.point.vectorAdd(ip.normal.scalarMultiply(-0.0001)), s.lights[l].position); 
-      let ips = s.intersect(rs);
-      if (!ips.hit || (ips.distance > ip.point.distanceFrom(s.lights[l].position))) {
-        let ls = s.lights[l].intensityAt(ip.point);
-        color = color.add(ls.colorMultiply(ip.material.scalarMultiply(ip.normal.z)));
-      }
+    for (let l = 0; l < s.lights.length; l++) {
+      let ls = s.lights[l].intensityAt(ip.point);
+      color = color.add(ls.colorMultiply(ip.material.scalarMultiply(1.0 * ip.normal.z)));
     }
   }
   return color;
@@ -34,11 +30,20 @@ const render = (ctx, s) => {
 const main = () => {
   const ctx = canvas.getContext('2d');
   let s = new Scene();
-  //s.addGeometry(new Sphere(new Vec3d(0, 0, -6), 1, new Color(1, 1, 1)));
-  s.addGeometry(new Sphere(new Vec3d(0.5, -0.5, -10), 2, new Color(1, 1, 1)));
-  s.addLight(new PointLight(new Vec3d(3, -2, -4), new Color(5, 10, 0), new Vec3d(0, 0, 1)));
-  s.addLight(new PointLight(new Vec3d(-4, 2, -5), new Color(0, 0, 10), new Vec3d(0, 0, 1)));
-  s.addLight(new PointLight(new Vec3d(3, -2, -9), new Color(3, 3, 3), new Vec3d(0, 0, 1)));
+  s.addGeometry(new Sphere(new Vec3d(0, 0, -6), 1, new Color(1, 1, 1)));
+
+  s.addLight(new PointLight(new Vec3d(-1.5, 1.5, -6), new Color(3, 0, 0), new Vec3d(0, 0, 1)));
+  s.addGeometry(new Sphere(new Vec3d(-1.5, 1.5, -6), 0.1, new Color(1, 1, 1)));
+  
+  s.addLight(new PointLight(new Vec3d(1.5, -1.5, -6), new Color(0, 0, 3), new Vec3d(0, 0, 1)));
+  s.addGeometry(new Sphere(new Vec3d(1.5, -1.5, -6), 0.1, new Color(1, 1, 1)));
+
+  s.addLight(new PointLight(new Vec3d(1.5, 1.5, -6), new Color(0, 3, 0), new Vec3d(0, 0, 1)));
+  s.addGeometry(new Sphere(new Vec3d(1.5, 1.5, -6), 0.1, new Color(1, 1, 1)));
+    
+  s.addLight(new PointLight(new Vec3d(-1.5, -1.5, -6), new Color(1, 1, 1), new Vec3d(0, 0, 1)));
+  s.addGeometry(new Sphere(new Vec3d(-1.5, -1.5, -6), 0.1, new Color(1, 1, 1)));
+
   render(ctx, s);
 }
 
