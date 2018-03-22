@@ -6,9 +6,13 @@ const traceRay = (r, s, l, d) => {
 
   if (ip.hit) 
   {
-    ls = l.intensityAt(ip.point);
     // diffuse shading
-    color = color.add(ls.colorMultiply(ip.material.scalarMultiply(-1 * ip.normal.z)));
+    let shadowRay = new Ray(ip.point.vectorAdd((ip.normal).scalarMultiply(0.001)), l.position);
+    let shadowIp = s.intersect(shadowRay);
+    if ((!shadowIp.hit) || (shadowIp.hit && ip.point.distanceFrom(l.position) < ip.point.distanceFrom(shadowIp.point))) {
+      let ls = l.intensityAt(ip.point);
+      color = color.add(ls.colorMultiply(ip.material.scalarMultiply(-1 * ip.normal.z)));  
+    }
   }
   return color;
 }
@@ -29,7 +33,7 @@ const render = (ctx, s, l) => {
 const main = () => {
   const ctx = canvas.getContext('2d');
   let s = new Sphere(new Vec3d(0, 0, 2), 1, new Color(1, 1, 1));
-  let l = new PointLight(new Vec3d(-2, 2, -3), new Color(10, 10, 0), new Vec3d(0, 0, 1));
+  let l = new PointLight(new Vec3d(-1, 1, -1), new Color(5, 1, 0), new Vec3d(0, 0, 1));
   render(ctx, s, l);
 }
 

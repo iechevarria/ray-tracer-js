@@ -17,7 +17,7 @@ class Vec3d {
     return new Vec3d(this.x - v.x, this.y - v.y, this.z - v.z);
   }
 
-  scalarMulitply(s) {
+  scalarMultiply(s) {
     return new Vec3d(this.x * s, this.y * s, this.z * s);
   }
 
