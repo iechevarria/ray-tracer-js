@@ -23,7 +23,6 @@ class Sphere {
     else if (t2 < 0) t = t1;
     else t = Math.min(t1, t2);
 
-
     let ip = r.at(t);
     let normal = (ip.vectorSubtract(this.center)).scalarDivide(this.radius);
 
