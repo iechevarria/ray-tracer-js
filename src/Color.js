@@ -5,16 +5,8 @@ class Color {
     this.b = b;
   }
 
-  equals(c) {
-    return this.r === c.r && this.g === c.g && this.b === c.b;
-  }
-
   add(c) {
     return new Color(this.r + c.r, this.g + c.g, this.b + c.b);
-  }
-
-  subtract(c) {
-    return new Color(this.r - c.r, this.g - c.g, this.b - c.b);
   }
 
   colorMultiply(c) {

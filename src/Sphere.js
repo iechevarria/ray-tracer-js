@@ -8,8 +8,8 @@ class Sphere {
   intersect(r) {
     // compute discriminant
     let a = 1.0;
-    let b = 2 * r.direction.dot(r.origin.vectorSubtract(this.center));
-    let rayToCenter = r.origin.vectorSubtract(this.center);
+    let b = 2 * r.direction.dot(r.origin.subtract(this.center));
+    let rayToCenter = r.origin.subtract(this.center);
     let c = rayToCenter.dot(rayToCenter) - this.radius * this.radius;
     let discriminant = b * b - 4 * c;
 
@@ -27,7 +27,7 @@ class Sphere {
 
     // get interesection point, normal vector
     let position = r.at(closestDistance);
-    let normal = (position.vectorSubtract(this.center)).scalarDivide(this.radius);
+    let normal = (position.subtract(this.center)).scalarDivide(this.radius);
 
     return new IntersectionPoint(true, position, normal, r, this.material);
   }

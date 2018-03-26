@@ -6,7 +6,7 @@ class PointLight {
   }
 
   distance(point) {
-    return this.position.distanceFrom(point);
+    return this.position.distance(point);
   }
 
   intensityAt(point) {

@@ -17,7 +17,7 @@ class Scene {
     let closestIp = this.geometry[0].intersect(r);
     for (let i = 0; i < this.geometry.length; i++) {
       let currentIp = this.geometry[i].intersect(r);
-      if (currentIp.hit && (!closestIp.hit || (closestIp.distance > currentIp.distance))) closestIp = currentIp;
+      if (currentIp.isHit && (!closestIp.isHit || (closestIp.distance > currentIp.distance))) closestIp = currentIp;
     }
     return closestIp;
   }

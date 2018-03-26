@@ -5,6 +5,6 @@ class Ray {
   }
 
   at(s) {
-    return this.origin.vectorAdd(this.direction.scalarMultiply(s));
+    return this.origin.add(this.direction.scalarMultiply(s));
   }
 }

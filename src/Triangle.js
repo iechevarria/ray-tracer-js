@@ -7,8 +7,8 @@ class Triangle {
   }
 
   normal() {
-    let e1 = this.v2.vectorSubtract(this.v1);
-    let e2 = this.v3.vectorSubtract(this.v1);
+    let e1 = this.v2.subtract(this.v1);
+    let e2 = this.v3.subtract(this.v1);
     return e1.cross(e2).normalize();
   }
 
@@ -25,9 +25,9 @@ class Triangle {
 
     let q = r.times(t);
 
-    let p1mq = this.v1.vectorSubtract(q);
-    let p2mq = this.v2.vectorSubtract(q);
-    let p3mq = this.v3.vectorSubtract(q);
+    let p1mq = this.v1.subtract(q);
+    let p2mq = this.v2.subtract(q);
+    let p3mq = this.v3.subtract(q);
 
     let A1 = 0.5 * ((p2mq).cross(p3mq)).dot(N);
     let A2 = 0.5 * ((p3mq).cross(p1mq)).dot(N);

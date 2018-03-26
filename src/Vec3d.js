@@ -9,11 +9,11 @@ class Vec3d {
     return v.x === this.x && v.y === this.y && v.z === this.z; 
   }
 
-  vectorAdd(v) {
+  add(v) {
     return new Vec3d(this.x + v.x, this.y + v.y, this.z + v.z);
   }
 
-  vectorSubtract(v) {
+  subtract(v) {
     return new Vec3d(this.x - v.x, this.y - v.y, this.z - v.z);
   }
 
@@ -39,19 +39,13 @@ class Vec3d {
     return Math.sqrt(this.dot(this));
   }
 
-  distanceFrom(v) {
-    return (v.vectorSubtract(this)).length();
+  distance(v) {
+    return (v.subtract(this)).length();
   }
 
   normalize() {
-    let len = this.length();
-    return new Vec3d(this.x / len, this.y / len, this.z / len);
-  }
-
-  clamp(lower, upper) {
-    return new Vec3d(Math.max(lower, Math.min(this.x, upper)),
-                     Math.max(lower, Math.min(this.y, upper)),
-                     Math.max(lower, Math.min(this.z, upper))); 
+    let length = this.length();
+    return new Vec3d(this.x / length, this.y / length, this.z / length);
   }
 
   toStr(v) {
