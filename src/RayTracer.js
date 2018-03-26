@@ -12,35 +12,33 @@ class RayTracer {
     if (ip.hit && ip.normal.z > 0) {
 
       // for each light in scene
-      for (let l = 0; l < scene.lights.length; l++) {
+      for (let i = 0; i < scene.lights.length; i++) {
     
         // generate shadow ray
-        let directionToLight = scene.lights[l].position.vectorSubtract(ip.position).normalize();      
+        let directionToLight = scene.lights[i].position.vectorSubtract(ip.position).normalize();      
         let shadowRay = new Ray(ip.position.vectorAdd(directionToLight.scalarMultiply(0.00001)), directionToLight);
         let shadowIp = scene.intersect(shadowRay);
   
         // if not in shadow, compute diffuse shading
-        if (!shadowIp.hit || (shadowIp.distance > scene.lights[l].distance(ip.position))) {
-          let intensity = scene.lights[l].intensityAt(ip.position);
+        if (!shadowIp.hit || (shadowIp.distance > scene.lights[i].distance(ip.position))) {
+          let intensity = scene.lights[i].intensityAt(ip.position);
           color = color.add(intensity.colorMultiply(ip.material.diffuseAlbedo.scalarMultiply(1.0 * ip.normal.z)));
         }
       }
 
       // recursively draw reflections
-      if (depth > 1 && ip.material.specular) {
+      if (depth > 1 && ip.material.isSpecular) {
 
         // reflect direction off of surface normal
-        let dDotN2 = ip.normal.scalarMultiply(2 * ip.normal.dot(ray.direction));
-        let reflectionVector = ray.direction.vectorSubtract(dDotN2);
-        let reflectionRay = new Ray(ip.position.vectorAdd(ip.normal.scalarMultiply(0.00001)), reflectionVector);
+        let reflectedVector = ray.direction.vectorSubtract(ip.normal.scalarMultiply(2 * ip.normal.dot(ray.direction)));
+        let reflectedRay = new Ray(ip.position.vectorAdd(ip.normal.scalarMultiply(0.00001)), reflectedVector);
 
         // get light from reflections
-        let reflectedLight = this.traceRay(reflectionRay, scene, depth - 1);
+        let reflectedLight = this.traceRay(reflectedRay, scene, depth - 1);
         color = color.add(reflectedLight.colorMultiply(ip.material.specularAlbedo));
       }
     }
 
-    else color = new Color(0, 0, 0);
     return color;  
   }
 

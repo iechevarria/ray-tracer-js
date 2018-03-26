@@ -1,7 +1,7 @@
 class Material {
-  constructor(diffuseAlbedo, specularAlbedo, specular) {
+  constructor(diffuseAlbedo, specularAlbedo, isSpecular) {
     this.diffuseAlbedo = diffuseAlbedo;
     this.specularAlbedo = specularAlbedo;
-    this.specular = specular;
+    this.isSpecular = isSpecular;
   }
 }
