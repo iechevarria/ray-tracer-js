@@ -14,11 +14,11 @@ class Scene {
   }
 
   intersect(r) {
-    let ip = this.geometry[0].intersect(r);
+    let closestIp = this.geometry[0].intersect(r);
     for (let i = 0; i < this.geometry.length; i++) {
-      let ipc = this.geometry[i].intersect(r);
-      if (ipc.hit && (!ip.hit || (ip.distance > ipc.distance))) ip = ipc;
+      let currentIp = this.geometry[i].intersect(r);
+      if (currentIp.hit && (!closestIp.hit || (closestIp.distance > currentIp.distance))) closestIp = currentIp;
     }
-    return ip;
+    return closestIp;
   }
 }

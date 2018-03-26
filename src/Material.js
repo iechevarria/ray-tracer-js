@@ -4,8 +4,4 @@ class Material {
     this.specularAlbedo = specularAlbedo;
     this.specular = specular;
   }
-
-  reflects(c) {
-    return this.albedo.colorMultiply(c);
-  }
 }

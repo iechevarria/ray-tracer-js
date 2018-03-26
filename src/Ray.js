@@ -8,5 +8,3 @@ class Ray {
     return this.origin.vectorAdd(this.direction.scalarMultiply(s));
   }
 }
-
-// module.exports = Ray;
