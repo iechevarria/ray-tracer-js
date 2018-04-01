@@ -1,9 +1,9 @@
 class Triangle {
-  constructor(v1, v2, v3, color) {
+  constructor(v1, v2, v3, material) {
     this.v1 = v1;
     this.v2 = v2;
     this.v3 = v3;
-    this.color = color;
+    this.material = material;
   }
 
   normal() {
@@ -16,14 +16,17 @@ class Triangle {
     let N = this.normal();
     let p1 = this.v1;
 
+    // get distance to plane defined by triangle's points
     let d = N.dot(p1);
     let denom = r.direction.dot(N);
     let num = r.origin.dot(N) + d;
     let t = num / denom;
 
-    if (t < 0.0001) return false;
+    // return no intersection if ray is parallel to plane or is too close
+    if (t < 0.0001) return new IntersectionPoint(false);
 
-    let q = r.times(t);
+    // compute barycentric coordinates
+    let q = r.at(t);
 
     let p1mq = this.v1.subtract(q);
     let p2mq = this.v2.subtract(q);
@@ -38,8 +41,9 @@ class Triangle {
     let beta = A2 / A_SUM;
     let gamma = A3 / A_SUM;
 
-    if (alpha < 0 || beta < 0 || gamma < 0) return false;
+    // return no intersection if plane intersection point is outside of triangle
+    if (alpha < 0 || beta < 0 || gamma < 0) return new IntersectionPoint(false);
 
-    return true;
+    return new IntersectionPoint(true, q, this.normal(), r, this.material);
   }
 }
