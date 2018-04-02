@@ -29,8 +29,8 @@ class RayTracer {
     let color = new Color(0, 0, 0);
     let ip = scene.intersect(ray);
     
-    // if the ray hits, normal is facing camera
-    if (ip.isHit && ip.normal.z > 0) {
+    // if the ray hits, normal is same direction as ray
+    if (ip.isHit && ip.normal.dot(ray.direction) < 0) {
 
       // for each light in scene
       for (let i = 0; i < scene.lights.length; i++) {
@@ -40,8 +40,8 @@ class RayTracer {
         let shadowRay = new Ray(ip.position.add(directionToLight.scalarMultiply(0.00001)), directionToLight);
         let shadowIp = scene.intersect(shadowRay);
   
-        // if not in shadow, compute diffuse shading
-        if (!shadowIp.isHit || (shadowIp.distance > scene.lights[i].distance(ip.position))) {
+        // if not in shadow and if normal faces light, compute diffuse shading
+        if ((!shadowIp.isHit || (shadowIp.distance > scene.lights[i].distance(ip.position))) && (directionToLight.dot(ip.normal) > 0)) {
           let intensity = scene.lights[i].intensityAt(ip.position);
           color = color.add(intensity.colorMultiply(ip.material.diffuseAlbedo.scalarMultiply(1.0 * ip.normal.z)));
         }
