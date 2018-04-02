@@ -43,7 +43,7 @@ class RayTracer {
         // if not in shadow and if normal faces light, compute diffuse shading
         if ((!shadowIp.isHit || (shadowIp.distance > scene.lights[i].distance(ip.position))) && (directionToLight.dot(ip.normal) > 0)) {
           let intensity = scene.lights[i].intensityAt(ip.position);
-          color = color.add(intensity.colorMultiply(ip.material.diffuseAlbedo.scalarMultiply(1.0 * ip.normal.z)));
+          color = color.add(intensity.colorMultiply(ip.material.diffuseAlbedo.scalarMultiply(ip.normal.dot(directionToLight))));
         }
       }
 
