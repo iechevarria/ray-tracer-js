@@ -5,11 +5,11 @@ class Sphere {
     this.material = material;
   }
 
-  intersect(r) {
+  intersect(ray) {
     // compute discriminant
     let a = 1.0;
-    let b = 2 * r.direction.dot(r.origin.subtract(this.center));
-    let rayToCenter = r.origin.subtract(this.center);
+    let b = 2 * ray.direction.dot(ray.origin.subtract(this.center));
+    let rayToCenter = ray.origin.subtract(this.center);
     let c = rayToCenter.dot(rayToCenter) - this.radius * this.radius;
     let discriminant = b * b - 4 * c;
 
@@ -26,9 +26,9 @@ class Sphere {
     else closestDistance = Math.min(distance1, distance2);
 
     // get interesection point, normal vector
-    let position = r.at(closestDistance);
+    let position = ray.at(closestDistance);
     let normal = (position.subtract(this.center)).scalarDivide(this.radius);
 
-    return new IntersectionPoint(true, position, normal, r, this.material);
+    return new IntersectionPoint(true, position, normal, ray, this.material);
   }
 }

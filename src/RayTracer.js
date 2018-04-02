@@ -7,7 +7,7 @@ class RayTracer {
   render(ctx, scene) {
     for (let x = 0; x < 800; x++) {
       for (let y = 0; y < 800; y++) {
-        
+
         let color = new Color(0, 0, 0);
         
         for (let sample = 0; sample < this.samples; sample++) {
@@ -31,7 +31,7 @@ class RayTracer {
     
     // if the ray hits, normal is same direction as ray
     if (ip.isHit && ip.normal.dot(ray.direction) < 0) {
-
+      
       // for each light in scene
       for (let i = 0; i < scene.lights.length; i++) {
     
@@ -39,7 +39,7 @@ class RayTracer {
         let directionToLight = scene.lights[i].position.subtract(ip.position).normalize();      
         let shadowRay = new Ray(ip.position.add(directionToLight.scalarMultiply(0.00001)), directionToLight);
         let shadowIp = scene.intersect(shadowRay);
-  
+        
         // if not in shadow and if normal faces light, compute diffuse shading
         if ((!shadowIp.isHit || (shadowIp.distance > scene.lights[i].distance(ip.position))) && (directionToLight.dot(ip.normal) > 0)) {
           let intensity = scene.lights[i].intensityAt(ip.position);
